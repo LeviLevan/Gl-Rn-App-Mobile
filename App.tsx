@@ -1,28 +1,34 @@
-import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StyleSheet, View, StatusBar} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import LoginPage from './src/modules/authentication/login/LoginPage';
 
-import useCachedResources from './src/hooks/useCachedResources';
-import useColorScheme from './src/hooks/useColorScheme';
-import Navigation from './src/config/navigation';
-import { Provider } from 'react-redux';
-import { store } from './src/config/redux';
+const App = () => {
 
-export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  return (
+    <KeyboardAwareScrollView contentContainerStyle={styles.containerStyle}>
+      <StatusBar style="auto"/>
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <Provider store={store}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
-      </Provider>
-    );
-  }
-}
+      <LoginPage/>
+      
+    </KeyboardAwareScrollView>
+  );
+
+};
+
+const styles = StyleSheet.create({
+  containerStyle:{
+    flex:1,
+    flexGrow: 1,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  container: {
+    flex:1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+export default App;
